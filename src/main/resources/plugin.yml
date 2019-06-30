@@ -1,0 +1,21 @@
+name: Anarchy
+description: Just the best utils plugin.
+author: Katho
+api-version: 1.14
+version: 1.1.1
+main: io.katho.anarchy.Core
+commands:
+   register:
+      description: You can register yourself using this command.
+   login:
+      description: You log in yourself using this command.
+   tpa:
+      description: Asks for teleport to someone else.
+   tpaccept:
+      description: Accept someone else teleport.
+   tpadecline:
+      description: Decline someone else teleport.
+   home:
+      description: Go to a selected home
+   sethome:
+      description: Set a new home.
