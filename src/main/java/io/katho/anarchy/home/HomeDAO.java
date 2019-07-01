@@ -1,4 +1,4 @@
-package io.katho.anarchy.player;
+package io.katho.anarchy.home;
 
 import java.io.FileNotFoundException;
 import java.util.Collection;
