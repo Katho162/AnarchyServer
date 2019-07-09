@@ -8,17 +8,18 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
-public class HomeConfig {
+public class HomesFile {
 
     private Plugin instance;
     private File folder;
     private File file;
     private FileConfiguration fileConfiguration;
 
-    public HomeConfig(UUID uuid, Plugin instance) {
+    public HomesFile(UUID uuid, Plugin instance) {
         this.instance = instance;
         this.folder = new File(instance.getDataFolder(), "homes");
         this.file = new File(folder, uuid.toString());
+        reload();
     }
 
     public FileConfiguration getFileConfiguration() {

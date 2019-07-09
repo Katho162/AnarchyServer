@@ -4,13 +4,13 @@ import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.UUID;
 
-public interface PlayerHomesDAO {
+public interface HomeDAO {
 
-    public void addHomes(PlayerHomes playerHomes);
-    public PlayerHomes getHomes(UUID uuid);
-    public void removeHomes(UUID uuid) throws FileNotFoundException;
-    public void updateHomes(PlayerHomes playerHomes);
-    public boolean existHomes(UUID uuid);
-    public Collection<PlayerHomes> getAllHomes();
+    public void addHome(Home home);
+    public Home getHome(String name);
+    public void removeHome(String name) throws FileNotFoundException;
+    public void updateHome(Home home);
+    public boolean existHome(String name);
+    public Collection<Home> getAllHomes();
 
 }

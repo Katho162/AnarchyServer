@@ -1,25 +1,16 @@
 package io.katho.anarchy.cmds;
 
-import io.katho.anarchy.player.Home;
-import io.katho.anarchy.player.PlayerHomes;
-import io.katho.anarchy.player.PlayerHomesDAO;
-import io.katho.anarchy.player.PlayerHomesDAOImpl;
+import io.katho.anarchy.Core;
+import io.katho.anarchy.home.Home;
+import io.katho.anarchy.home.HomeDAO;
+import io.katho.anarchy.home.HomeDAOImpl;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-
 public class Sethome implements CommandExecutor {
-
-    private PlayerHomesDAO playerHomesDAO;
-
-    public Sethome() {
-        this.playerHomesDAO = new PlayerHomesDAOImpl();
-    }
-
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -33,32 +24,25 @@ public class Sethome implements CommandExecutor {
             Player p = (Player) sender;
             if (args.length == 1) {
 
-                if(this.playerHomesDAO.existHomes(p.getUniqueId())) {
+                HomeDAO homeDAO = new HomeDAOImpl(p.getUniqueId());
+
+                if(homeDAO.existHome(args[0])) {
 
                     Home home = new Home(p.getLocation(), args[0]);
-                    PlayerHomes homes = this.playerHomesDAO.getHomes(p.getUniqueId());
-                    ArrayList<Home> homesList = homes.getHomes();
-                    homesList.add(home);
-                    homes.setHomes(homesList);
-                    this.playerHomesDAO.updateHomes(homes);
-                    p.sendMessage("Home set.");
-                    return true;
+                    homeDAO.updateHome(home);
+                    p.sendMessage(Core.getPluginMessages().getAsString("homeUpdate"));
 
                 } else {
 
                     Home home = new Home(p.getLocation(), args[0]);
-                    ArrayList<Home> homesList = new ArrayList<Home>();
-                    homesList.add(home);
-                    PlayerHomes homes = new PlayerHomes(p.getUniqueId(), homesList);
-                    playerHomesDAO.addHomes(homes);
-                    p.sendMessage("Home set.");
-                    return true;
+                    homeDAO.addHome(home);
+                    p.sendMessage(Core.getPluginMessages().getAsString("homeCreate"));
 
                 }
 
 
             } else {
-                p.sendMessage("");
+                p.sendMessage(Core.getPluginMessages().getAsString("sethomeUsage"));
                 return true;
             }
         }

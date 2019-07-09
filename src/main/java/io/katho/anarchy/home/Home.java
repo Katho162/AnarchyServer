@@ -1,4 +1,4 @@
-package io.katho.anarchy.player;
+package io.katho.anarchy.home;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

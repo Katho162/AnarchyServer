@@ -80,6 +80,7 @@ public class Core extends JavaPlugin {
      * Build main plugin configuration files.
      */
     private void buildFiles() {
+        saveDefaultConfig();
         saveResource("config.json", false);
         saveResource("pt_BR.json", false);
         saveResource("en_US.json", false);

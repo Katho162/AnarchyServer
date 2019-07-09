@@ -1,7 +1,8 @@
 package io.katho.anarchy.cmds;
 
-import io.katho.anarchy.player.PlayerHomesDAO;
-import io.katho.anarchy.player.PlayerHomesDAOImpl;
+import io.katho.anarchy.Core;
+import io.katho.anarchy.home.HomeDAO;
+import io.katho.anarchy.home.HomeDAOImpl;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -9,12 +10,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class HomeCmd implements CommandExecutor {
-
-    private PlayerHomesDAO playerHomesDAO;
-
-    public HomeCmd() {
-        this.playerHomesDAO = new PlayerHomesDAOImpl();
-    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -24,28 +19,24 @@ public class HomeCmd implements CommandExecutor {
             return true;
         }
 
-        if (cmd.getName().equalsIgnoreCase("sethome")) {
+        if (cmd.getName().equalsIgnoreCase("home")) {
             Player p = (Player) sender;
             if (args.length == 1) {
 
-                if(this.playerHomesDAO.existHomes(p.getUniqueId())) {
+                HomeDAO homeDAO = new HomeDAOImpl(p.getUniqueId());
 
-                    this.playerHomesDAO.getHomes(p.getUniqueId()).getHomes().forEach(home -> {
-                        if(home.getName().equals(args[0])) {
-                            p.sendMessage("You are in your home");
-                            p.teleport(home.getLoc());
-                            return;
-                        }
-                        p.sendMessage("There are no homes with this name");
-                    });
+                if(homeDAO.existHome(args[0])) {
 
+                    p.teleport(homeDAO.getHome(args[0]).getLoc());
+                    p.sendMessage(Core.getPluginMessages().getAsString("homeTeleport"));
+                    return true;
                 } else {
-                    p.sendMessage("You have no homes sets please use: /sethome <name>");
+                    p.sendMessage(Core.getPluginMessages().getAsString("noHome"));
                     return true;
                 }
 
             } else {
-                p.sendMessage("");
+                p.sendMessage(Core.getPluginMessages().getAsString("homeUsage"));
                 return true;
             }
         }

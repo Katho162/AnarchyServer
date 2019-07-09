@@ -30,6 +30,12 @@
   "tpadeclineUsage": "&cUsage: /tpadecline | /tpadecline <player>",
   "tpaMessageQuest": "Do you: ",
   "tpaInvite": "&eYour tpa request was sent.",
-  "tpaAccept": "&eYou've accept the tpa request",
-  "tpaDecline": "&eYou've decline the tpa request"
+  "tpaHasAccept": "&eYou've accept the tpa request",
+  "tpaHasDecline": "&eYou've decline the tpa request",
+  "sethomeUsage": "&cUsage: /sethome <name>",
+  "homeUsage": "&cUsage: /home <name>",
+  "homeUpdate": "&eYou've update your home.",
+  "homeCreate": "&eYou've created your new home",
+  "homeTeleport": "&eYou've been teleported to your home",
+  "noHome": "&cActually you have no homes with this name use: /sethome <name>"
 }

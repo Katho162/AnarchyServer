@@ -46,7 +46,7 @@ public class Tpadecline implements CommandExecutor {
                 if (Tpa.TELEPORTS.containsKey(t)) {
                     t.sendMessage(Core.getPluginMessages().getAsString("tpaHasDeclined", t));
                     Tpa.TELEPORTS.remove(t);
-                    p.sendMessage(Core.getPluginMessages().getAsString("tpaDecline"));
+                    p.sendMessage(Core.getPluginMessages().getAsString("tpaHasDecline"));
                     return true;
                 } else {
                     p.sendMessage(Core.getPluginMessages().getAsString("tpaInvalid"));

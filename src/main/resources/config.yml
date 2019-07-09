@@ -1,0 +1,5 @@
+locale: en_US
+
+authentication:
+  login_interval: ‭604800000‬
+  login_timeout: 3600

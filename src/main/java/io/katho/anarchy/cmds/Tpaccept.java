@@ -46,7 +46,7 @@ public class Tpaccept implements CommandExecutor {
                 if (Tpa.TELEPORTS.containsKey(t)) {
                     t.teleport(p);
                     Tpa.TELEPORTS.remove(t);
-                    p.sendMessage(Core.getPluginMessages().getAsString("tpaAccept"));
+                    p.sendMessage(Core.getPluginMessages().getAsString("tpaHasAccept"));
                     return true;
                 } else {
                     p.sendMessage(Core.getPluginMessages().getAsString("tpaInvalid"));
