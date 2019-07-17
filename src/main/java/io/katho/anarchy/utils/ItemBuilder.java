@@ -39,7 +39,7 @@ public class ItemBuilder {
         return this;
     }
 
-    public ItemBuilder name(String name){
+    public ItemBuilder setTitle(String name){
         return changeItemMeta(it -> it.setDisplayName(name));
     }
 

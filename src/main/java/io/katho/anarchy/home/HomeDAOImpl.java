@@ -6,6 +6,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.UUID;
@@ -58,7 +59,11 @@ public class HomeDAOImpl implements HomeDAO {
     }
 
     @Override
-    public Collection<Home> getAllHomes() {
-        return null;
+    public ArrayList<Home> getAllHomes() {
+        ArrayList<Home> homes = new ArrayList<>();
+        this.homesFile.getFileConfiguration().getKeys(false).forEach(k -> {
+            homes.add(getHome(k));
+        });
+        return homes;
     }
 }

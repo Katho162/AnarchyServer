@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import io.katho.anarchy.cmds.*;
 import io.katho.anarchy.configuration.PluginMessagesFactory;
+import io.katho.anarchy.inventories.HomeInvListener;
 import io.katho.anarchy.listeners.ChatFormater;
 import io.katho.anarchy.listeners.PreLogin;
 import io.katho.anarchy.configuration.PluginMessages;
@@ -74,6 +75,7 @@ public class Core extends JavaPlugin {
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new PreLogin(), this);
         pm.registerEvents(new ChatFormater(), this);
+        pm.registerEvents(new HomeInvListener(), this);
     }
 
     /**

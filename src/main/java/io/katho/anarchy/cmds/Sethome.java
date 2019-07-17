@@ -26,20 +26,25 @@ public class Sethome implements CommandExecutor {
 
                 HomeDAO homeDAO = new HomeDAOImpl(p.getUniqueId());
 
-                if(homeDAO.existHome(args[0])) {
+                if(!(homeDAO.getAllHomes().size() > 10)) {
+                    if(homeDAO.existHome(args[0])) {
 
-                    Home home = new Home(p.getLocation(), args[0]);
-                    homeDAO.updateHome(home);
-                    p.sendMessage(Core.getPluginMessages().getAsString("homeUpdate"));
+                        Home home = new Home(p.getLocation(), args[0]);
+                        homeDAO.updateHome(home);
+                        p.sendMessage(Core.getPluginMessages().getAsString("homeUpdate"));
+                        return true;
 
+                    } else {
+
+                        Home home = new Home(p.getLocation(), args[0]);
+                        homeDAO.addHome(home);
+                        p.sendMessage(Core.getPluginMessages().getAsString("homeCreate"));
+                        return true;
+
+                    }
                 } else {
-
-                    Home home = new Home(p.getLocation(), args[0]);
-                    homeDAO.addHome(home);
-                    p.sendMessage(Core.getPluginMessages().getAsString("homeCreate"));
-
+                    p.sendMessage(Core.getPluginMessages().getAsString("homeMaximum"));
                 }
-
 
             } else {
                 p.sendMessage(Core.getPluginMessages().getAsString("sethomeUsage"));

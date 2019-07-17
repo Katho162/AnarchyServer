@@ -3,15 +3,15 @@ package io.katho.anarchy.cmds;
 import io.katho.anarchy.Core;
 import io.katho.anarchy.home.HomeDAO;
 import io.katho.anarchy.home.HomeDAOImpl;
-import io.katho.anarchy.inventories.HomeHolder;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class HomeCmd implements CommandExecutor {
+import java.io.FileNotFoundException;
 
+public class Delhome implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
@@ -20,21 +20,20 @@ public class HomeCmd implements CommandExecutor {
             return true;
         }
 
-        if (cmd.getName().equalsIgnoreCase("home")) {
+        if(cmd.getName().equalsIgnoreCase("delhome")) {
+
             Player p = (Player) sender;
-            if (args.length == 0) {
 
-                HomeHolder holder = new HomeHolder(p);
-                p.openInventory(holder.getInventory());
-
-            } else if (args.length == 1) {
+            if(args.length == 1) {
 
                 HomeDAO homeDAO = new HomeDAOImpl(p.getUniqueId());
-
                 if(homeDAO.existHome(args[0])) {
-
-                    p.teleport(homeDAO.getHome(args[0]).getLoc());
-                    p.sendMessage(Core.getPluginMessages().getAsString("homeTeleport"));
+                    try {
+                        homeDAO.removeHome(args[0]);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    p.sendMessage(Core.getPluginMessages().getAsString("homeDelete"));
                     return true;
                 } else {
                     p.sendMessage(Core.getPluginMessages().getAsString("noHome"));
@@ -42,13 +41,12 @@ public class HomeCmd implements CommandExecutor {
                 }
 
             } else {
-                p.sendMessage(Core.getPluginMessages().getAsString("homeUsage"));
+                p.sendMessage(Core.getPluginMessages().getAsString("delhomeUsage"));
                 return true;
             }
-        }
 
+        }
 
         return false;
     }
-
 }
