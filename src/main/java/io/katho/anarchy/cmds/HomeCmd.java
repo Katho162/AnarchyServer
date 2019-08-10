@@ -2,7 +2,7 @@ package io.katho.anarchy.cmds;
 
 import io.katho.anarchy.Core;
 import io.katho.anarchy.home.HomeDAO;
-import io.katho.anarchy.home.HomeDAOImpl;
+import io.katho.anarchy.home.HomeDAOYaml;
 import io.katho.anarchy.inventories.HomeHolder;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -29,7 +29,7 @@ public class HomeCmd implements CommandExecutor {
 
             } else if (args.length == 1) {
 
-                HomeDAO homeDAO = new HomeDAOImpl(p.getUniqueId());
+                HomeDAO homeDAO = new HomeDAOYaml(p.getUniqueId());
 
                 if(homeDAO.existHome(args[0])) {
 

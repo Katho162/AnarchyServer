@@ -3,7 +3,7 @@ package io.katho.anarchy.cmds;
 import io.katho.anarchy.Core;
 import io.katho.anarchy.player.PlayerAccount;
 import io.katho.anarchy.player.PlayerAccountDAO;
-import io.katho.anarchy.player.PlayerAccountDAOImpl;
+import io.katho.anarchy.player.PlayerAccountDAOJson;
 import io.katho.anarchy.utils.TitleBuilder;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -19,7 +19,7 @@ public class Register implements CommandExecutor {
      * Register command is the main command of Register/Login system, is there where the players will make their account files.
      */
     public Register() {
-        this.playerAccountDAO = new PlayerAccountDAOImpl();
+        this.playerAccountDAO = new PlayerAccountDAOJson();
     }
 
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {

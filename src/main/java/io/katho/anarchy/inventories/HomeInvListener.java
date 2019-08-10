@@ -1,14 +1,11 @@
 package io.katho.anarchy.inventories;
 
-import io.katho.anarchy.home.Home;
 import io.katho.anarchy.home.HomeDAO;
-import io.katho.anarchy.home.HomeDAOImpl;
+import io.katho.anarchy.home.HomeDAOYaml;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class HomeInvListener implements Listener {
 
@@ -23,7 +20,7 @@ public class HomeInvListener implements Listener {
 
                 Player p = (Player) e.getWhoClicked();
 
-                HomeDAO homeDAO = new HomeDAOImpl(p.getUniqueId());
+                HomeDAO homeDAO = new HomeDAOYaml(p.getUniqueId());
 
                 if(e.getClick().isLeftClick()) {
 

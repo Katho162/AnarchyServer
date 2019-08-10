@@ -48,6 +48,15 @@ public class PlayerAccount {
         this.registerTimestamp = registerTimestamp;
     }
 
+    public PlayerAccount(UUID uuid, String name, String lastIP, String password, long registerTimestamp, long lastLogin) {
+        this.uuid = uuid;
+        this.name = name;
+        this.lastIP = password;
+        this.password = DigestUtils.sha256Hex(password);
+        this.lastLogin = lastLogin;
+        this.registerTimestamp = registerTimestamp;
+    }
+
     public UUID getUUID() {
         return uuid;
     }

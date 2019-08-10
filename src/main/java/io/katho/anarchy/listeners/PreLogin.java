@@ -8,7 +8,7 @@ import io.katho.anarchy.configuration.PluginMessagesFactory;
 import io.katho.anarchy.player.PlayerAccount;
 import io.katho.anarchy.player.PlayerAccountDAO;
 import io.katho.anarchy.configuration.PluginMessages;
-import io.katho.anarchy.player.PlayerAccountDAOImpl;
+import io.katho.anarchy.player.PlayerAccountDAOJson;
 import io.katho.anarchy.utils.Title;
 import io.katho.anarchy.utils.TitleBuilder;
 import org.bukkit.Bukkit;
@@ -35,7 +35,7 @@ public class PreLogin implements Listener {
      * Is the handle of player prelogin state, if player isn't logged it will be freeze until it get log in.
      */
     public PreLogin() {
-        this.playerAccountDAO = new PlayerAccountDAOImpl();
+        this.playerAccountDAO = new PlayerAccountDAOJson();
         this.pluginMessages = PluginMessagesFactory.makePluginMessages();
         this.gson = new GsonBuilder().create();
     }

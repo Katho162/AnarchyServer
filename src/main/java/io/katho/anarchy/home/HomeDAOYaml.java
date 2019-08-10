@@ -11,12 +11,12 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.UUID;
 
-public class HomeDAOImpl implements HomeDAO {
+public class HomeDAOYaml implements HomeDAO {
 
     private UUID uuid;
     private HomesFile homesFile;
 
-    public HomeDAOImpl(UUID uuid) {
+    public HomeDAOYaml(UUID uuid) {
         this.uuid = uuid;
         this.homesFile = new HomesFile(this.uuid, Core.getInstance());
     }
@@ -38,7 +38,7 @@ public class HomeDAOImpl implements HomeDAO {
 
     @Override
     public void removeHome(String name) throws FileNotFoundException {
-        this.homesFile.getFileConfiguration().set(name, null);
+        this.homesFile.getFileConfiguration().set(name, "");
         this.homesFile.save();
     }
 

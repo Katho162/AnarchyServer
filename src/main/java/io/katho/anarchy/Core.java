@@ -2,6 +2,7 @@ package io.katho.anarchy;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mongodb.*;
 import io.katho.anarchy.cmds.*;
 import io.katho.anarchy.configuration.PluginMessagesFactory;
 import io.katho.anarchy.inventories.HomeInvListener;
@@ -14,6 +15,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.net.UnknownHostException;
 import java.util.*;
 
 /**
@@ -28,6 +30,9 @@ public class Core extends JavaPlugin {
     private static PluginMessages PLUGIN_MESSAGES;
     // Local Instance Stuff;
     private Gson gson;
+    // Mongo connection
+    public static MongoClient mongoClient;
+    public static DB database;
 
     /**
      * Is the plugin bootstrap method.
@@ -41,6 +46,7 @@ public class Core extends JavaPlugin {
         PLUGIN_MESSAGES = PluginMessagesFactory.makePluginMessages();
         this.registerCommands();
         this.registerListeners();
+        this.connect("localhost", 27017, "anarchy");
         Bukkit.getLogger().info("Plugin bootstrap done!");
         Bukkit.getOnlinePlayers().forEach(p -> p.kickPlayer(getPluginMessages().getAsString("reloadKick")));
     }
@@ -66,6 +72,7 @@ public class Core extends JavaPlugin {
         getCommand("tpadecline").setExecutor(new Tpadecline());
         getCommand("sethome").setExecutor(new Sethome());
         getCommand("home").setExecutor(new HomeCmd());
+        getCommand("delhome").setExecutor(new Delhome());
     }
 
     /**
@@ -108,6 +115,21 @@ public class Core extends JavaPlugin {
      */
     public synchronized static PluginMessages getPluginMessages() {
         return PLUGIN_MESSAGES;
+    }
+
+    /**
+     * Connect to mongo database
+     * @param ip the mongodb server ip
+     * @param port mongodb server port
+     * @param db mongodb database name
+     */
+    private void connect(String ip, int port, String db) {
+        try {
+            mongoClient = new MongoClient(ip, port);
+            database = mongoClient.getDB(db);
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
     }
 
 

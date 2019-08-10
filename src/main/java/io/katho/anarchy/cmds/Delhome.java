@@ -2,7 +2,7 @@ package io.katho.anarchy.cmds;
 
 import io.katho.anarchy.Core;
 import io.katho.anarchy.home.HomeDAO;
-import io.katho.anarchy.home.HomeDAOImpl;
+import io.katho.anarchy.home.HomeDAOYaml;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -23,12 +23,14 @@ public class Delhome implements CommandExecutor {
         if(cmd.getName().equalsIgnoreCase("delhome")) {
 
             Player p = (Player) sender;
+            p.sendMessage("Test");
 
             if(args.length == 1) {
 
-                HomeDAO homeDAO = new HomeDAOImpl(p.getUniqueId());
+                HomeDAO homeDAO = new HomeDAOYaml(p.getUniqueId());
                 if(homeDAO.existHome(args[0])) {
                     try {
+                        p.sendMessage("Your home " + args[0] + " was removed.");
                         homeDAO.removeHome(args[0]);
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();

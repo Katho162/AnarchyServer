@@ -10,10 +10,20 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'org.spigotmc:spigot:1.13.2-R0.1-SNAPSHOT'
-    compileOnly 'org.spigotmc:spigot-api:1.13.2-R0.1-SNAPSHOT'
-    compileOnly 'commons-codec:commons-codec:1.10'
+    implementation 'org.spigotmc:spigot:1.13.2-R0.1-SNAPSHOT'
+    implementation 'org.spigotmc:spigot-api:1.13.2-R0.1-SNAPSHOT'
+    implementation 'org.mongodb:mongo-java-driver:2.12.3'
+    implementation 'commons-codec:commons-codec:1.10'
 }
+
+task copyJar {
+    copy {
+        from "build/libs/Anarchy-1.1.1-SNAPSHOT.jar.jar"
+        into "C:\\Development\\AnarchyServer\\server\\plugins"
+    }
+}
+
+build.dependsOn copyJar
 
 group = 'io.katho'
 version = '1.1.1-SNAPSHOT'

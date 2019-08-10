@@ -62,7 +62,7 @@ public class Tpa implements CommandExecutor {
 
                     Bukkit.getScheduler().runTaskLaterAsynchronously(Core.getInstance(), task -> {
                         if (TELEPORTS.containsKey(p)) {
-                            p.sendMessage(Core.getPluginMessages().getAsString("tpaHasDeclined", p));
+                            p.sendMessage(Core.getPluginMessages().getAsString("tpaHasDeclined", t));
                             TELEPORTS.remove(p);
                         }
                     }, 20 * 30);

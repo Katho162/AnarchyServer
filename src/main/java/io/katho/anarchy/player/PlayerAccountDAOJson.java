@@ -8,12 +8,12 @@ import java.io.*;
 import java.util.Collection;
 import java.util.UUID;
 
-public class PlayerAccountDAOImpl implements PlayerAccountDAO {
+public class PlayerAccountDAOJson implements PlayerAccountDAO {
 
     private Gson gson;
     private final String ACCOUNTS_DIR = Core.getInstance().getDataFolder() + "/accounts/";
 
-    public PlayerAccountDAOImpl() {
+    public PlayerAccountDAOJson() {
         this.gson = new GsonBuilder().create();
     }
 
@@ -63,11 +63,11 @@ public class PlayerAccountDAOImpl implements PlayerAccountDAO {
     }
 
     @Override
-    public void updateAccount(PlayerAccount playerAccount) {
+    public void updateAccount(PlayerAccount o, PlayerAccount n) {
         File dir = new File(ACCOUNTS_DIR);
         dir.mkdirs();
-        try (Writer writer = new FileWriter(ACCOUNTS_DIR + playerAccount.getUUID() + ".json")) {
-            gson.toJson(playerAccount, writer);
+        try (Writer writer = new FileWriter(ACCOUNTS_DIR + o.getUUID() + ".json")) {
+            gson.toJson(n, writer);
         } catch (IOException e) {
             e.printStackTrace();
         }

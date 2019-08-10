@@ -18,3 +18,5 @@ commands:
       description: Go to a selected home
    sethome:
       description: Set a new home.
+   delhome:
+      description: Delete a previous home.

@@ -1,7 +1,7 @@
 package io.katho.anarchy.inventories;
 
 import io.katho.anarchy.home.HomeDAO;
-import io.katho.anarchy.home.HomeDAOImpl;
+import io.katho.anarchy.home.HomeDAOYaml;
 import io.katho.anarchy.utils.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -21,7 +21,7 @@ public class HomeHolder implements InventoryHolder {
 
     public HomeHolder(Player player) {
         this.player = player;
-        this.homeDAO = new HomeDAOImpl(this.player.getUniqueId());
+        this.homeDAO = new HomeDAOYaml(this.player.getUniqueId());
         this.title = player.getName() + "'s homes";
         this.inv = Bukkit.createInventory(this, 9*3, this.title);
         // Place homes

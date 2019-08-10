@@ -3,7 +3,7 @@ package io.katho.anarchy.cmds;
 import io.katho.anarchy.Core;
 import io.katho.anarchy.home.Home;
 import io.katho.anarchy.home.HomeDAO;
-import io.katho.anarchy.home.HomeDAOImpl;
+import io.katho.anarchy.home.HomeDAOYaml;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -24,7 +24,7 @@ public class Sethome implements CommandExecutor {
             Player p = (Player) sender;
             if (args.length == 1) {
 
-                HomeDAO homeDAO = new HomeDAOImpl(p.getUniqueId());
+                HomeDAO homeDAO = new HomeDAOYaml(p.getUniqueId());
 
                 if(!(homeDAO.getAllHomes().size() > 10)) {
                     if(homeDAO.existHome(args[0])) {
